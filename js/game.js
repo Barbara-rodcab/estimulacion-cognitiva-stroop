@@ -5,4 +5,14 @@ class Game {
         this.intervalId = null;
         this.bg = new Background(this.ctx);
     }
+
+    start(){
+        this.intervalId = setInterval (() => {
+            this.draw();
+        }, 1000 / 60);
+    }
+
+    draw(){
+        this.bg.draw();
+    }
 }

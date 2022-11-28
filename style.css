@@ -1,35 +1,53 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap');
 
 body {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 60em;
-  font-family: 'Roboto Mono', sans-serif;
-  line-height: 1.5;
-  color: #2d354c;
-  background-image: url("./Images/bgInicial.jpeg");
+  padding: 0;
+  text-align: center;
+  background-image: url("./Images/abstract-wallpaper-preview.jpeg");
   background-repeat: no-repeat;
-  background-size: 100%;
-  width: 2000px;
+  font-family: 'Roboto Mono', sans-serif;
+  background-size: 90%;
+
 }
 
 button,
 input {
   font: inherit;
   color: inherit;
+  align-items: center;
 }
-
+/*
 h1 {
-    text-align: center;
-   
     padding: 10px;
+    align-self: center;
 }
 
 .allDivTest{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-right: 30%;
+    margin-right: 20%;
+    margin-left: 2%;
   }
-  
+  */
+
+canvas {
+  position: absolute;
+  width: 90%;
+  left:0;
+  top: 0 !important;
+  z-index: -1;
+}
+
+#startGame {
+  left: 0;
+  top: 100;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  background-position: center;
+}
 
