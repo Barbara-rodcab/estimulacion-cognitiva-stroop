@@ -8,9 +8,8 @@ body {
   line-height: 1.5;
   color: #2d354c;
   background-image: url("./Images/bgInicial.jpeg");
-  background-position: absolute;
   background-repeat: no-repeat;
-  background-size: 90%;
+  background-size: 100%;
   width: 2000px;
 }
 
@@ -22,7 +21,7 @@ input {
 
 h1 {
     text-align: center;
-    font-size: 50px;
+   
     padding: 10px;
 }
 
@@ -33,3 +32,4 @@ h1 {
     margin-right: 30%;
   }
   
+
