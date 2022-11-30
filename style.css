@@ -6,7 +6,7 @@ body {
   background-image: url("./Images/colorsbg.jpeg");
   background-repeat: no-repeat;
   font-family: 'Roboto Mono', sans-serif;
-  background-size: 90%;
+  background-size: 70%;
 
 }
 
@@ -33,7 +33,7 @@ h1 {
 
 canvas {
   position: absolute;
-  width: 90%;
+  width: 70%;
   left:0;
   top: 0 !important;
   z-index: -1;
@@ -45,9 +45,8 @@ canvas {
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 1300px;
+  width: 900px;
   height: 500px;
-  position: absolute;
   background-position: center;
 }
 
