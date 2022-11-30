@@ -1,6 +1,15 @@
 const obstaclesImages = [
-    'yellowGreen.png',
-    'game-over.jpg',
+    'blueGreen.png',
+    'bluePurple.png',
+    'blueRed.png',
+    'greenBlue.png',
+    'greenPurple.png',
+    'greenRed.png',
+    'purpleBlue.png',
+    'purpleGreen.png',
+    'redBlue.png',
+    'redGreen.png',
+    'redPurple.png', 
 ]
 
 class Game {
