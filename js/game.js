@@ -1,3 +1,8 @@
+const obstaclesImages = [
+    'yellowGreen.png',
+    'game-over.jpg',
+]
+
 class Game {
     constructor(canvasId){
         this.canvas = document.getElementById(canvasId);
@@ -43,9 +48,11 @@ class Game {
     }
 
     addObstacle() {
+        const randomIndex = Math.floor(Math.random() * obstaclesImages.length);
+        console.log(randomIndex);
 		const randomWidth = Math.random() * 100 + 50;
 		const randomX = Math.random() * (this.canvas.width - randomWidth);
-		const obstacle = new Obstacle(this.ctx, randomX, - this.player.height, randomWidth);
+		const obstacle = new Obstacle(this.ctx, randomX, - this.player.height, randomWidth, obstaclesImages[randomIndex]);
 		this.obstacles.push(obstacle);
 	}
    

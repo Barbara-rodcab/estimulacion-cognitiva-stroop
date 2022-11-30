@@ -1,11 +1,11 @@
 class Obstacle {
-	constructor(ctx, x, y, width) {
+	constructor(ctx, x, y, width, image) {
 		this.ctx = ctx;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.img = new Image();
-		this.img.src = "./images/yellowGreen.png";
+		this.img.src = `./images/${image}`;
 		this.isReady = false;
 		this.img.onload = () => {
 			this.isReady = true;
