@@ -7,3 +7,11 @@ startBtn.addEventListener("click", () => {
   game.start();
 
 });
+
+document.addEventListener('keydown', (event) => {
+	game.player.onKeyEvent(event);
+});
+
+document.addEventListener('keyup', () => {
+	game.player.onKeyEvent(event)
+})

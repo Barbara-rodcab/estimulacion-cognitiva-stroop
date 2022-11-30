@@ -3,10 +3,11 @@ class Background {
         this.ctx = ctx;
         this.x = 0;
         this.y = 0;
+        this.vy = 3;
         this.width = this.ctx.canvas.width;
         this.height = this.ctx.canvas.height;
         this.img = new Image();
-        this.img.src = "./images/bgpastel.jpeg"
+        this.img.src = "./images/bgwhite.jpeg"
         this.isReady = false;
         this.img.onload = () => {
             this.isReady = true;
@@ -22,6 +23,18 @@ class Background {
                     this.width,
                     this.height
                 );
+                this.ctx.drawImage(this.img,
+                     this.x, 
+                     this.y - this.ctx.canvas.height,
+                      this.ctx.canvas.width, 
+                      this.ctx.canvas.height);
             }
         }
-    }
+            move() {
+                this.y += this.vy;
+                if (this.y >= this.ctx.canvas.height) {
+                    this.y = 0;
+                }
+            }
+        }
+      
