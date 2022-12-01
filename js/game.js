@@ -67,16 +67,20 @@ class Game {
     }
 
     start(){
+        this.setNewType();
         this.intervalId = setInterval (() => {
             this.draw(); // clear me borra el background y start
             this.move();
             this.checkCollisions();
+            this.clearObstacles();
             this.tick++;
 			if (this.tick % 80 === 0) {
 				this.addObstacle();
 			}
+			if (this.tick % 480 === 0) {
+				this.setNewType();
+			}
         }, 1000 / 60);
-        this.selectedType = titlearray[Math.floor(Math.random() * titlearray.length)];
     }
 
     draw(){
@@ -99,7 +103,17 @@ class Game {
 
     clear () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.obstacles = this.obstacles.filter(obstacle => obstacle.y < this.canvas.height);
+    }
+    
+    clearObstacles() {
+        this.obstacles = this.obstacles.filter(obstacle => {
+            if (obstacle.y < this.canvas.height) {
+                return true;
+            }
+            if (obstacle.type === this.selectedType) {
+            }
+            return false;
+        });
     }
 
     addObstacle() {
@@ -124,7 +138,8 @@ class Game {
             if (collidingObs.type === this.selectedType) {
                 this.score++;
                 this.obstacles.splice(this.obstacles.indexOf(collidingObs), 1)
-            } else {
+            } 
+            else {
                 this.gameOver();
             }
 		}
@@ -141,13 +156,17 @@ class Game {
 	}
 
     drawScore() {
-		this.ctx.fillStyle = '#000';
+		this.ctx.fillStyle = '#FFFFFF';
 		this.ctx.font = '24px Arial';
 		this.ctx.fillText("Score:" + this.score, 10, 30);
 	}
     drawSelected () {
-        this.ctx.fillStyle = '#000';
-		this.ctx.font = '30px Arial';
-		this.ctx.fillText("Color:" + this.selectedType, 40, 60);
+        this.ctx.fillStyle = '#FFFFFF';
+		this.ctx.font = '24px Arial';
+		this.ctx.fillText("Color:" + this.selectedType, 30, 60);
 	}
+
+    setNewType() {
+        this.selectedType = titlearray[Math.floor(Math.random() * titlearray.length)];
     }
+}
