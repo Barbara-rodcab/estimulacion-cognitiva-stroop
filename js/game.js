@@ -111,6 +111,8 @@ class Game {
                 return true;
             }
             if (obstacle.type === this.selectedType) {
+                this.gameOver();
+
             }
             return false;
         });
@@ -134,7 +136,7 @@ class Game {
    checkCollisions() {
     const collidingObs = this.obstacles.find(obstacle => this.player.isColliding(obstacle))
 		if (collidingObs) {
-            console.log(collidingObs.type);
+           
             if (collidingObs.type === this.selectedType) {
                 this.score++;
                 this.obstacles.splice(this.obstacles.indexOf(collidingObs), 1)
