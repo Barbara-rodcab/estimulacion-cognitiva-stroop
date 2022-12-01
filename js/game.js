@@ -1,15 +1,56 @@
-const obstaclesImages = [
-    'blueGreen.png',
-    'bluePurple.png',
-    'blueRed.png',
-    'greenBlue.png',
-    'greenPurple.png',
-    'greenRed.png',
-    'purpleBlue.png',
-    'purpleGreen.png',
-    'redBlue.png',
-    'redGreen.png',
-    'redPurple.png', 
+const obstaclesData = [
+    {
+        type: 'green',
+        img: 'blueGreen.png',
+    },
+    {
+        type: 'purple',
+        img: 'bluePurple.png',
+    },
+    {
+        type: 'red',
+        img: 'blueRed.png',
+    },
+    {
+        type: 'blue',
+        img: 'greenBlue.png',
+    },
+    {
+        type: 'purple',
+        img: 'greenPurple.png',
+    },
+    {
+        type: 'red',
+        img: 'greenRed.png',
+    },
+    {
+        type: 'blue',
+        img: 'purpleBlue.png',
+    },
+
+    {
+        type: 'green',
+        img:  'purpleGreen.png',
+    },
+    {
+        type: 'blue',
+        img:  'redBlue.png',
+    },
+    {
+        type: 'green',
+        img:  'redGreen.png',
+    },
+    {
+        type: 'purple',
+        img:  'redPurple.png', 
+    },
+]
+
+const titlearray =[
+    "blue",
+    "green",
+    "purple", 
+    "red",
 ]
 
 class Game {
@@ -21,6 +62,8 @@ class Game {
         this.intervalId = null;
         this.obstacles= [];
 		this.tick = 0;
+        this.selectedType = '';
+        this.score = 0;
     }
 
     start(){
@@ -33,6 +76,7 @@ class Game {
 				this.addObstacle();
 			}
         }, 1000 / 60);
+        this.selectedType = titlearray[Math.floor(Math.random() * titlearray.length)];
     }
 
     draw(){
@@ -41,6 +85,8 @@ class Game {
         this.obstacles.forEach(obstacle => {
 			obstacle.draw();
 		});
+        this.drawScore();
+        this.drawSelected();
     }
 
     move() {
@@ -57,17 +103,30 @@ class Game {
     }
 
     addObstacle() {
-        const randomIndex = Math.floor(Math.random() * obstaclesImages.length);
+        const randomIndex = Math.floor(Math.random() * obstaclesData.length);
         console.log(randomIndex);
 		const randomWidth = Math.random() * 100 + 50;
 		const randomX = Math.random() * (this.canvas.width - randomWidth);
-		const obstacle = new Obstacle(this.ctx, randomX, - this.player.height, randomWidth, obstaclesImages[randomIndex]);
+		const obstacle = new Obstacle(
+            this.ctx, randomX,
+            - this.player.height,
+            randomWidth,
+            obstaclesData[randomIndex].img,
+            obstaclesData[randomIndex].type
+        );
 		this.obstacles.push(obstacle);
 	}
    
    checkCollisions() {
-		if (this.obstacles.some(obstacle => this.player.isColliding(obstacle))) {
-			this.gameOver();
+    const collidingObs = this.obstacles.find(obstacle => this.player.isColliding(obstacle))
+		if (collidingObs) {
+            console.log(collidingObs.type);
+            if (collidingObs.type === this.selectedType) {
+                this.score++;
+                this.obstacles.splice(this.obstacles.indexOf(collidingObs), 1)
+            } else {
+                this.gameOver();
+            }
 		}
 	}
 
@@ -80,5 +139,15 @@ class Game {
 		this.ctx.textAlign = "center";
 		this.ctx.fillText("Game Over", this.canvas.width / 2, this.canvas.height / 2);
 	}
-    
-}
+
+    drawScore() {
+		this.ctx.fillStyle = '#000';
+		this.ctx.font = '24px Arial';
+		this.ctx.fillText("Score:" + this.score, 10, 30);
+	}
+    drawSelected () {
+        this.ctx.fillStyle = '#000';
+		this.ctx.font = '30px Arial';
+		this.ctx.fillText("Color:" + this.selectedType, 40, 60);
+	}
+    }

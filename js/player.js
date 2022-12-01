@@ -9,7 +9,7 @@ class Player {
 		this.vy = 0;
 		this.img = new Image();
         console.log ("entro")
-		this.img.src = "./images/player3.png";
+		this.img.src = "./images/cerebroCapaIzquierda.png";
 		this.isReady = false;
 		this.img.onload = () => {
 			this.height = this.width * this.img.height / this.img.width;
@@ -25,8 +25,16 @@ class Player {
 
 	draw() {
 		if (this.isReady) {
-			this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+			this.ctx.drawImage(
+				this.img, 
+				 this.x, 
+				 this.y, 
+				 this.width, 
+				 this.height
+				 );
+				 this.tick++;
 		}
+
 	}
 
 	move() {

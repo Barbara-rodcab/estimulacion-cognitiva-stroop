@@ -1,9 +1,10 @@
 class Obstacle {
-	constructor(ctx, x, y, width, image) {
+	constructor(ctx, x, y, width, image, type) {
 		this.ctx = ctx;
 		this.x = x;
 		this.y = y;
 		this.width = width;
+		this.type = type;
 		this.img = new Image();
 		this.img.src = `./images/${image}`;
 		this.isReady = false;
