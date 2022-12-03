@@ -7,7 +7,7 @@ class Background {
         this.width = this.ctx.canvas.width;
         this.height = this.ctx.canvas.height;
         this.img = new Image();
-        this.img.src = "./images/spacebg2.png"
+        this.img.src = "./images/purpleBlack.webp"
         this.isReady = false;
         this.img.onload = () => {
             this.isReady = true;

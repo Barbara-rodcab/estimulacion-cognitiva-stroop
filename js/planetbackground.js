@@ -6,7 +6,7 @@ class PlanetBackground {
         this.vx = -1.5;
 
         this.width = this.ctx.canvas.width;
-        this.height = 300;
+        this.height = 250;
 
         this.img = new Image();
         this.img.src = './images/spacebgbgtransp.png';
