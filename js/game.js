@@ -59,6 +59,7 @@ class Game {
 		this.ctx = this.canvas.getContext("2d");
         this.bg = new Background(this.ctx);
         this.groundBackground = new GroundBackground(this.ctx);
+        this.planetBackground = new PlanetBackground(this.ctx);
         this.player = new Player(this.ctx, this.canvas.width / 2, this.canvas.height - 100);
         this.intervalId = null;
         this.obstacles= [];
@@ -87,6 +88,7 @@ class Game {
     draw(){
         this.bg.draw();
         this.groundBackground.draw();
+        this.planetBackground.draw();
         this.player.draw();
         this.obstacles.forEach(obstacle => {
 			obstacle.draw();
@@ -98,6 +100,7 @@ class Game {
     move() {
         this.bg.move();
         this.groundBackground.move();
+        this.planetBackground.move();
 		this.player.move();
         this.obstacles.forEach(obstacle => {
 			obstacle.move();
