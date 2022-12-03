@@ -4,29 +4,40 @@ class Player {
 		this.x = x;
 		this.y = y;
 		this.width = 70;
+		this.xFrame = 0;
+		this.yFrame = 0;
+		this.horizontalFrames = 4;
+		this.verticalFrames = 4;
 		this.speed = 5;
 		this.vx = 0;
 		this.vy = 0;
 		this.img = new Image();
-        console.log ("entro")
-		this.img.src = "./images/cerebroCapaIzquierda.png";
+		this.tick = 0;
+
+		this.img.src = "./images/spacemanSpriteOk.png";
 		this.isReady = false;
 		this.img.onload = () => {
 			this.height = this.width * this.img.height / this.img.width;
 			this.isReady = true;
 		}
 		this.movements = {
+			up: false,
+			down: false,
 			left: false,
 			right: false,
-			up: false,
-			down: false
 		};
+			
+		this.moving = false
 	}
 
 	draw() {
 		if (this.isReady) {
 			this.ctx.drawImage(
-				this.img, 
+				this.img,
+				this.img.width / this.horizontalFrames * this.xFrame,
+				this.img.height / this.verticalFrames * this.yFrame,
+				this.img.width / this.horizontalFrames,
+				this.img.height / this.verticalFrames, 
 				 this.x, 
 				 this.y, 
 				 this.width, 
@@ -38,22 +49,37 @@ class Player {
 	}
 
 	move() {
+		if (Object.values(this.movements).every(movement => movement === false)) {
+			this.yFrame = 0
+			this.xFrame = 0
+		} else {
+			if (this.tick % 120 === 0) {
+				this.xFrame++;
+				if (this.xFrame >= this.horizontalFrames - 1) {
+					this.xFrame = 0;
+				}
+			}
+		}
 		if (this.movements.left) {
 			this.vx = -this.speed;
+			this.yFrame = 1;
 		} else if (this.movements.right) {
 			this.vx = this.speed;
+			this.yFrame = 2;
 		} else {
 			this.vx = 0;
 		}
 
 		if (this.movements.up) {
 			this.vy = -this.speed;
+			this.yFrame = 3;
 		} else if (this.movements.down) {
 			this.vy = this.speed;
 		} else {
 			this.vy = 0;
 		}
 
+		
 		this.x += this.vx;
 		this.y += this.vy;
 

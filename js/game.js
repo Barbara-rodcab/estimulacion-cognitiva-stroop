@@ -58,7 +58,7 @@ class Game {
         this.canvas = document.getElementById(canvasId);
 		this.ctx = this.canvas.getContext("2d");
         this.bg = new Background(this.ctx);
-        this.groundBackground = new GroundBackground(ctx);
+        this.groundBackground = new GroundBackground(this.ctx);
         this.player = new Player(this.ctx, this.canvas.width / 2, this.canvas.height - 100);
         this.intervalId = null;
         this.obstacles= [];

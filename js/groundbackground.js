@@ -4,13 +4,14 @@ class GroundBackground {
         this.ctx = ctx;
 
         this.x = 0;
+        this.y = this.ctx.canvas.height / 2;
         this.vx = -1.2;
 
         this.width = this.ctx.canvas.width;
-        this.height = this.ctx.canvas.height;
+        this.height = this.ctx.canvas.height / 2;
 
         this.img = new Image();
-        this.img.src = './images/fondoPisoBg.png';
+        this.img.src = './images/testcratersyellow.png';
         this.img.isReady = false;
 
         this.img.onload = () => {
@@ -24,14 +25,14 @@ class GroundBackground {
             this.ctx.drawImage(
                 this.img,
                 this.x,
-                0,
+                this.y,
                 this.width,
                 this.height
             )
             this.ctx.drawImage(
                 this.img,
                 this.x + this.width,
-                0,
+                this.y,
                 this.width,
                 this.height
             )

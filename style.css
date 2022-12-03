@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap');
 
-body {
+/*body {
   padding: 0;
   text-align: center;
-  background-image: url("./Images/colorsbg.jpeg");
+  background-image: url("./Images/bgbg.png");
   background-repeat: no-repeat;
   font-family: 'Roboto Mono', sans-serif;
   background-size: 70%;
@@ -15,7 +15,7 @@ input {
   font: inherit;
   color: inherit;
   align-items: center;
-}
+} */
 /*
 h1 {
     padding: 10px;
@@ -31,7 +31,7 @@ h1 {
   }
   */
 
-canvas {
+/*canvas {
   position: absolute;
   width: 70%;
   left:0;
@@ -50,3 +50,55 @@ canvas {
   background-position: center;
 }
 
+*/
+body {
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.flex-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+#center-container {
+    width: 1000px;
+    height:800px;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    top: 75px;
+    
+    
+}
+
+
+body button {
+
+    font-size: 40px;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    color: black;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 25px;
+    margin-bottom: 20px;
+   
+    
+}
+
+#canvas-test {
+    width: 1000px;
+    border: 2px solid black;
+    background-image: url("./Images/bgbg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    position: absolute;
+}
