@@ -1,3 +1,4 @@
+
 const game = new Game("canvas-test") ;
 
 //const startBtn = document.getElementById("start-btn");
@@ -20,13 +21,3 @@ document.addEventListener('keyup', () => {
 	game.player.onKeyEvent(event)
 })
 
-/*
-oneKeyDown(keyCode) {
-  this.player.oneKeyDown(keyCode);    
-}
-
-oneKeyUp(keyCode) {
-  this.player.oneKeyUp(keyCode);
-}
-
-*/

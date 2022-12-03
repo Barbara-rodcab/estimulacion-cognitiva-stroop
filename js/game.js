@@ -30,69 +30,70 @@ const obstaclesData = [
 
     {
         type: 'green',
-        img:  'purpleGreen.png',
+        img: 'purpleGreen.png',
     },
     {
         type: 'blue',
-        img:  'redBlue.png',
+        img: 'redBlue.png',
     },
     {
         type: 'green',
-        img:  'redGreen.png',
+        img: 'redGreen.png',
     },
     {
         type: 'purple',
-        img:  'redPurple.png', 
+        img: 'redPurple.png',
     },
 ]
 
-const titlearray =[
+const titlearray = [
     "blue",
     "green",
-    "purple", 
+    "purple",
     "red",
 ]
 
 class Game {
-    constructor(canvasId){
+    constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
-		this.ctx = this.canvas.getContext("2d");
+        this.ctx = this.canvas.getContext("2d");
+        this.gameOverPic = new GameOverPic(this.ctx);
         this.bg = new Background(this.ctx);
         this.groundBackground = new GroundBackground(this.ctx);
         this.planetBackground = new PlanetBackground(this.ctx);
         this.player = new Player(this.ctx, this.canvas.width / 2, this.canvas.height - 100);
         this.intervalId = null;
-        this.obstacles= [];
-		this.tick = 0;
+        this.obstacles = [];
+        this.tick = 0;
         this.selectedType = '';
         this.score = 0;
     }
 
-    start(){
+    start() {
         this.setNewType();
-        this.intervalId = setInterval (() => {
+        this.intervalId = setInterval(() => {
             this.draw(); // clear me borra el background y start
             this.move();
             this.checkCollisions();
             this.clearObstacles();
             this.tick++;
-			if (this.tick % 80 === 0) {
-				this.addObstacle();
-			}
-			if (this.tick % 480 === 0) {
-				this.setNewType();
-			}
+            if (this.tick % 80 === 0) {
+                this.addObstacle();
+            }
+            if (this.tick % 480 === 0) {
+                this.setNewType();
+            }
         }, 1000 / 60);
     }
 
-    draw(){
+    draw() {
         this.bg.draw();
         this.groundBackground.draw();
         this.planetBackground.draw();
         this.player.draw();
         this.obstacles.forEach(obstacle => {
-			obstacle.draw();
-		});
+            obstacle.draw();
+        });
         this.drawScore();
         this.drawSelected();
     }
@@ -101,16 +102,16 @@ class Game {
         this.bg.move();
         this.groundBackground.move();
         this.planetBackground.move();
-		this.player.move();
+        this.player.move();
         this.obstacles.forEach(obstacle => {
-			obstacle.move();
-		}); 
+            obstacle.move();
+        });
     }
 
-    clear () {
+    clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    
+
     clearObstacles() {
         this.obstacles = this.obstacles.filter(obstacle => {
             if (obstacle.y < this.canvas.height) {
@@ -127,52 +128,78 @@ class Game {
     addObstacle() {
         const randomIndex = Math.floor(Math.random() * obstaclesData.length);
         console.log(randomIndex);
-		const randomWidth = Math.random() * 100 + 50;
-		const randomX = Math.random() * (this.canvas.width - randomWidth);
-		const obstacle = new Obstacle(
+        const randomWidth = Math.random() * 100 + 50;
+        const randomX = Math.random() * (this.canvas.width - randomWidth);
+        const obstacle = new Obstacle(
             this.ctx, randomX,
             - this.player.height,
             randomWidth,
             obstaclesData[randomIndex].img,
             obstaclesData[randomIndex].type
         );
-		this.obstacles.push(obstacle);
-	}
-   
-   checkCollisions() {
-    const collidingObs = this.obstacles.find(obstacle => this.player.isColliding(obstacle))
-		if (collidingObs) {
-           
+        this.obstacles.push(obstacle);
+    }
+
+    checkCollisions() {
+        const collidingObs = this.obstacles.find(obstacle => this.player.isColliding(obstacle))
+        if (collidingObs) {
+
             if (collidingObs.type === this.selectedType) {
                 this.score++;
                 this.obstacles.splice(this.obstacles.indexOf(collidingObs), 1)
-            } 
+            }
             else {
                 this.gameOver();
             }
-		}
-	}
+        }
+    }
 
-	gameOver() {
-		clearInterval(this.intervalId);
-		this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)";
-		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-		this.ctx.fillStyle = "rgb(255, 255, 255)";
-		this.ctx.font = "40px Arial";
-		this.ctx.textAlign = "center";
-		this.ctx.fillText("Game Over", this.canvas.width / 2, this.canvas.height / 2);
-	}
+    gameOver() {
+        clearInterval(this.intervalId);
+
+        this.ctx.save();
+
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+        this.ctx.restore();
+        this.gameOverPic.draw();
+
+        /* this.ctx.font = '64px sans-serif';
+        this.ctx.fillStyle = 'white';
+        */
+
+        if (this.score === 0) {
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(`You dont have any points!`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 70);
+
+        } else if (this.score === 1) {
+
+            this.ctx.fillText(`You have ${this.score} points!!`, 680, 1000);
+
+        } else {
+
+            this.ctx.fillText(`You have ${this.score} points!!`, 680, 1000);
+        }
+
+        /*this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = "rgb(255, 255, 255)";
+        this.ctx.font = "40px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText("Game Over", this.canvas.width / 2, this.canvas.height / 2); */
+    }
 
     drawScore() {
-		this.ctx.fillStyle = '#FFFFFF';
-		this.ctx.font = '24px Arial';
-		this.ctx.fillText("Score:" + this.score, 10, 30);
-	}
-    drawSelected () {
         this.ctx.fillStyle = '#FFFFFF';
-		this.ctx.font = '24px Arial';
-		this.ctx.fillText("Color:" + this.selectedType, 30, 60);
-	}
+        this.ctx.font = '24px Arial';
+        this.ctx.fillText("Score:" + this.score, 10, 30);
+    }
+    drawSelected() {
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.font = '24px Arial';
+        this.ctx.fillText("Color:" + this.selectedType, 30, 60);
+    }
 
     setNewType() {
         this.selectedType = titlearray[Math.floor(Math.random() * titlearray.length)];
