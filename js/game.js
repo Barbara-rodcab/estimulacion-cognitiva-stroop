@@ -1,52 +1,69 @@
 const obstaclesData = [
     {
-        type: 'green',
-        img: 'blueGreen.png',
+        color: 'green',
+        text: 'bluee',
+        img: 'blueeGreen.png',
     },
     {
-        type: 'purple',
-        img: 'bluePurple.png',
+        color: 'purple',
+        text: 'bluee',
+        img: 'blueePurple.png',
     },
     {
-        type: 'red',
-        img: 'blueRed.png',
+        color: 'red',
+        text: 'bluee',
+        img: 'blueeRed.png',
     },
     {
-        type: 'blue',
-        img: 'greenBlue.png',
+        color: 'blue',
+        text: 'greenn',
+        img: 'greennBlue.png',
     },
     {
-        type: 'purple',
-        img: 'greenPurple.png',
+        color: 'purple',
+        text: 'greenn',
+        img: 'greennPurple.png',
     },
     {
-        type: 'red',
-        img: 'greenRed.png',
+        color: 'red',
+        text: 'greenn',
+        img: 'greennRed.png',
     },
     {
-        type: 'blue',
-        img: 'purpleBlue.png',
+        color: 'blue',
+        text: 'purplee',
+        img: 'purpleeBlue.png',
     },
 
     {
-        type: 'green',
-        img: 'purpleGreen.png',
+        color: 'green',
+        text: 'purplee',
+        img: 'purpleeGreen.png',
     },
     {
-        type: 'blue',
-        img: 'redBlue.png',
+        color: 'red',
+        text: 'purplee',
+        img: 'purpleeRed.png',
+    },
+
+    {
+        color: 'blue',
+        text: 'redd',
+        img: 'reddBlue.png',
     },
     {
-        type: 'green',
-        img: 'redGreen.png',
+        color: 'green',
+        text: 'redd',
+        img: 'reddGreen.png',
     },
     {
-        type: 'purple',
-        img: 'redPurple.png',
+        color: 'purple',
+        text: 'redd',
+        img: 'reddPurple.png',
     },
 ]
 
-const titlearray = [
+const titleColorArray = [
     "blue",
     "green",
     "purple",
@@ -67,6 +84,7 @@ class Game {
         this.tick = 0;
         this.selectedType = '';
         this.score = 0;
+        this.type = '';
     }
 
     start() {
@@ -135,7 +153,7 @@ class Game {
             - this.player.height,
             randomWidth,
             obstaclesData[randomIndex].img,
-            obstaclesData[randomIndex].type
+            obstaclesData[randomIndex][this.type]
         );
         this.obstacles.push(obstacle);
     }
@@ -175,19 +193,14 @@ class Game {
 
         } else if (this.score === 1) {
 
-            this.ctx.fillText(`You have ${this.score} points!!`, 680, 1000);
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(`You have ${this.score} point!!`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 70);
 
         } else {
-
-            this.ctx.fillText(`You have ${this.score} points!!`, 680, 1000);
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(`You have ${this.score} points!!`, this.ctx.canvas.width / 2, this.ctx.canvas.height / 2 + 70);
         }
 
-        /*this.ctx.fillStyle = "rgba(50, 50, 50, 0.7)";
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.fillStyle = "rgb(255, 255, 255)";
-        this.ctx.font = "40px Arial";
-        this.ctx.textAlign = "center";
-        this.ctx.fillText("Game Over", this.canvas.width / 2, this.canvas.height / 2); */
     }
 
     drawScore() {
@@ -197,11 +210,12 @@ class Game {
     }
     drawSelected() {
         this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.font = '24px Arial';
-        this.ctx.fillText("Color:" + this.selectedType, 30, 60);
+        this.ctx.font = '35px Arial';
+        console.log(this.type);
+        this.ctx.fillText(this.type + ': ' + this.selectedType, 30, 60);
     }
 
     setNewType() {
-        this.selectedType = titlearray[Math.floor(Math.random() * titlearray.length)];
+        this.selectedType = titleColorArray[Math.floor(Math.random() * titleColorArray.length)];
     }
 }
