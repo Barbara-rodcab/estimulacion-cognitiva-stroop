@@ -11,14 +11,12 @@ window.onload = function() {
   }
 
   document.getElementById('color-btn').onclick = () => {
-    console.log('color-btn')
     document.getElementById("buttons-container").classList.add('hidden');
     game.type = 'color';
     game.start();
   }
 
   document.getElementById('text-btn').onclick = () => {
-    console.log('text-btn')
     document.getElementById("buttons-container").classList.add('hidden');
     game.type = 'text';
     game.start();

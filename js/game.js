@@ -1,65 +1,65 @@
 const obstaclesData = [
     {
         color: 'green',
-        text: 'bluee',
-        img: 'blueeGreen.png',
+        text: 'blue',
+        img: 'blueGreen.png',
     },
     {
         color: 'purple',
-        text: 'bluee',
-        img: 'blueePurple.png',
+        text: 'blue',
+        img: 'bluePurple.png',
     },
     {
         color: 'red',
-        text: 'bluee',
-        img: 'blueeRed.png',
+        text: 'blue',
+        img: 'blueRed.png',
     },
     {
         color: 'blue',
-        text: 'greenn',
-        img: 'greennBlue.png',
+        text: 'green',
+        img: 'greenBlue.png',
     },
     {
         color: 'purple',
-        text: 'greenn',
-        img: 'greennPurple.png',
+        text: 'green',
+        img: 'greenPurple.png',
     },
     {
         color: 'red',
-        text: 'greenn',
-        img: 'greennRed.png',
+        text: 'green',
+        img: 'greenRed.png',
     },
     {
         color: 'blue',
-        text: 'purplee',
-        img: 'purpleeBlue.png',
+        text: 'purple',
+        img: 'purpleBlue.png',
     },
 
     {
         color: 'green',
-        text: 'purplee',
-        img: 'purpleeGreen.png',
+        text: 'purple',
+        img: 'purpleGreen.png',
     },
     {
         color: 'red',
-        text: 'purplee',
-        img: 'purpleeRed.png',
+        text: 'purple',
+        img: 'purpleRed.png',
     },
 
     {
         color: 'blue',
-        text: 'redd',
-        img: 'reddBlue.png',
+        text: 'red',
+        img: 'redBlue.png',
     },
     {
         color: 'green',
-        text: 'redd',
-        img: 'reddGreen.png',
+        text: 'red',
+        img: 'redGreen.png',
     },
     {
         color: 'purple',
-        text: 'redd',
-        img: 'reddPurple.png',
+        text: 'red',
+        img: 'redPurple.png',
     },
 ]
 
@@ -145,7 +145,7 @@ class Game {
 
     addObstacle() {
         const randomIndex = Math.floor(Math.random() * obstaclesData.length);
-        console.log(randomIndex);
+        //console.log(randomIndex);
         const randomWidth = Math.random() * 100 + 50;
         const randomX = Math.random() * (this.canvas.width - randomWidth);
         const obstacle = new Obstacle(
@@ -165,7 +165,7 @@ class Game {
             if (collidingObs.type === this.selectedType) {
                 this.score++;
                 this.obstacles.splice(this.obstacles.indexOf(collidingObs), 1)
-            }
+            } 
             else {
                 this.gameOver();
             }
