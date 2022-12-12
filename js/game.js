@@ -85,6 +85,7 @@ class Game {
         this.selectedType = '';
         this.score = 0;
         this.type = '';
+       
     }
 
     start() {
@@ -182,6 +183,13 @@ class Game {
 
         this.ctx.restore();
         this.gameOverPic.draw();
+
+        const playAgainBtn = document.querySelector(".buttons-playagain")
+        console.log ("entro")
+        playAgainBtn.classList.remove('hidden')
+
+        
+    
 
         /* this.ctx.font = '64px sans-serif';
         this.ctx.fillStyle = 'white';

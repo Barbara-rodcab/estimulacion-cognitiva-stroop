@@ -1,13 +1,12 @@
 
 const game = new Game("canvas-test");
 
-//const startBtn = document.getElementById("start-btn");
-
 window.onload = function() {
 
   document.getElementById('start-btn').onclick = () => {
       document.getElementById("center-container").hidden = true;
       document.getElementById('buttons-container').classList.remove('hidden');
+      //document.getElementById('buttons-playagain').classList.remove('hidden');
   }
 
   document.getElementById('color-btn').onclick = () => {
@@ -20,6 +19,11 @@ window.onload = function() {
     document.getElementById("buttons-container").classList.add('hidden');
     game.type = 'text';
     game.start();
+  }
+  
+  document.querySelector(".buttons-playagain button").onclick = () => {
+    //console.log ("entro scrip");
+    document.location.reload();
   }
 }
 
